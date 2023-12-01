@@ -26,18 +26,6 @@ public final class Main extends JavaPlugin implements Listener {
         event.getPlayer().sendMessage(Component.text("Hello, " + event.getPlayer().getName() + "!"));
     }
 
-    @EventHandler
-    public void tickStart(ServerTickStartEvent event) {
-        /*try {
-            Player s = Bukkit.getPlayer("SnappyNutria356");
-            assert s != null;
-            if (s.isOnline()) {
-                s.sendMessage(Component.text("ur gay"));
-            }
-        } catch (Exception e) {
-
-        }*/
-    }
     @Override
     public void onDisable() {
 

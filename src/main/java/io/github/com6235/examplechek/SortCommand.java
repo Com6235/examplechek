@@ -273,7 +273,7 @@ public class SortCommand extends Command {
         for (int i = 0; i < 42 - realStack.size(); i++) {
             realStack.add(realStack.size() - 5, null);
         }
-        sender.sendMessage(Arrays.toString(realStack.toArray(new ItemStack[41])));
+        /*sender.sendMessage(Arrays.toString(realStack.toArray(new ItemStack[41])));*/
         Objects.requireNonNull(Bukkit.getPlayer(sender.getName())).getInventory().setContents(realStack.toArray(new ItemStack[41]));
         return false;
     }
