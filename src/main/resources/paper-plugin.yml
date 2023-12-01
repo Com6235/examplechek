@@ -1,0 +1,12 @@
+name: examplechek
+version: '${version}'
+main: io.github.com6235.examplechek.Main
+api-version: '1.20'
+permissions :
+  permission.Yop:
+    description: "Is OP"
+    default: op
+  permission.Nop:
+    description: "Not OP"
+    default: not op
+
