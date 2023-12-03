@@ -23,7 +23,7 @@ public class SortCommand extends Command {
     public List<ItemStack> sortedInventory = new ArrayList<>();
     public List<ItemStack> sorted = new ArrayList<>();
 
-    public void sort(List<ItemStack> srt, List<ItemStack> toSort, CommandSender sender) {
+    public void sort(List<ItemStack> srt, List<ItemStack> toSort) {
         ItemStack prev = null;
         List<ItemStack> unsorted = new ArrayList<>();
         for (int idx = 0; idx < toSort.size(); idx++) {
@@ -31,17 +31,14 @@ public class SortCommand extends Command {
             if (prev == null) {
                 prev = i;
                 srt.add(i);
-                sender.sendMessage("Prev - null");
             } else if (prev.getType() == i.getType()) {
                 srt.add(i);
-                sender.sendMessage("Sorted: %s".formatted(i));
             } else if (prev.getType() != i.getType()) {
                 unsorted.add(i);
-                sender.sendMessage("UnSorted: %s".formatted(i));
             }
         }
         if (!unsorted.isEmpty()) {
-            sort(srt, unsorted, sender);
+            sort(srt, unsorted);
         }
     }
 
@@ -62,12 +59,9 @@ public class SortCommand extends Command {
         List<ItemStack> iv_itemStack = new ArrayList<>();
         // Расфасовка
         hotbar = List.of(Arrays.copyOfRange(mainStorage, 0, 9));
-        sender.sendMessage(Arrays.toString(mainStorage));
-        sender.sendMessage(String.valueOf(mainStorage.length));
         for (int indexer = 9; indexer < mainStorage.length; indexer++) {
             if (mainStorage[indexer] != null) {
                 inventory.add(mainStorage[indexer]);
-                sender.sendMessage(String.valueOf(inventory.size()));
             }
         }
         // сортировка
@@ -80,8 +74,8 @@ public class SortCommand extends Command {
                 }
             }
         }
-        sort(sortedHotbar, hb_blockStack, sender);
-        sort(sortedHotbar, hb_itemStack, sender);
+        sort(sortedHotbar, hb_blockStack);
+        sort(sortedHotbar, hb_itemStack);
         for (ItemStack element : inventory) {
             if (element != null) {
                 if (element.getType().isBlock()) {
@@ -91,14 +85,9 @@ public class SortCommand extends Command {
                 }
             }
         }
-        sort(sortedInventory, iv_blockStack, sender);
-        sort(sortedInventory, iv_itemStack, sender);
+        sort(sortedInventory, iv_blockStack);
+        sort(sortedInventory, iv_itemStack);
 
-        sender.sendMessage(Arrays.toString(sortedHotbar.toArray(new ItemStack[9])));
-        sender.sendMessage(Arrays.toString(sortedInventory.toArray(new ItemStack[26])));
-
-        sender.sendMessage(String.valueOf(sortedHotbar.size()));
-        sender.sendMessage(String.valueOf(sortedInventory.size()));
         // Соединение отсортированных хотбара и инвентаря
         sorted.addAll(sortedHotbar);
         sorted.addAll(sortedInventory);
